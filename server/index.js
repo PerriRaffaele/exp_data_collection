@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const app = express();
 app.use(cors({
-    origin: ["https://exp-data-collection-frontend.vercel.app/"],
+    origin: ["https://exp-data-collection-frontend.vercel.app"],
     methods: ['GET', 'POST'],
     credentials: true
 }));
