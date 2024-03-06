@@ -118,6 +118,7 @@ export default {
   computed: {
   },
   mounted() {
+    axios.defaults.withCredentials = true;
     this.fetchBoxWords();
   //   clean the input for the file
     this.$refs.fileInput.value = null;
