@@ -3,6 +3,6 @@
       { "source": "/(.*)", "destination": "./app" }
     ],
     "headers": [
-      { "source": "/(.*)", "headers": [{ "key": "Access-Control-Allow-Origin", "value": "https://exp-data-collection-frontend.vercel.app/" }] }
+      { "source": "/(.*)", "headers": [{ "key": "Access-Control-Allow-Origin", "value": "https://exp-data-collection-frontend.vercel.app" }] }
     ]
   }
