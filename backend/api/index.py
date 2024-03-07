@@ -5,7 +5,7 @@ import csv
 import os
 app = Sanic()
  
- 
+@app.route('/')
 @app.route('/exercises', methods=['GET'])
 async def get_exercises():
     user_id = str(uuid.uuid())
