@@ -28,7 +28,7 @@ export default {
           feedback: this.feedback,
         };
         console.log('Submitting feedback:', feedbackData);
-        const response = await axios.post('https://exp-data-collection-api.vercel.app/submit-feedback', feedbackData);
+        const response = await axios.post('https://exp-data-collection.vercel.app/submit-feedback', feedbackData);
         console.log('Feedback submitted:', response.data);
 
         this.$router.push('/end-view')
