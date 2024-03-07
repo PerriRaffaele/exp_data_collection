@@ -6,9 +6,9 @@ import os
 
 
 app = Flask(__name__)
-CORS(app, origins='https://exp-data-collection-frontend.vercel.app')
+CORS(app)
 
-used_words = set()  # Keep track of used words
+
 
 @app.route('/exercises', methods=['GET'])
 # HERE CODE CALLED FROM THE FRONTEND FILE ExperimentViewUno.vue

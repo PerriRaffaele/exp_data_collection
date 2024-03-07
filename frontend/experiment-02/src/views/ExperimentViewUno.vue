@@ -40,7 +40,7 @@ export default {
     async fetchBoxWords() {
       try {
         this.startTime = performance.now();
-        const response = await axios.get('https://exp-data-collection.vercel.app/exercises');
+        const response = await axios.get('../../../../backend/exercises');
         this.exercises = response.data;
         console.log('Fetched exercises:', this.exercises);
 
