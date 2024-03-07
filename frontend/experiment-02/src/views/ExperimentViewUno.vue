@@ -54,7 +54,7 @@ export default {
     },
     handleFileUpload() {
       // Get the uploaded file from the input
-      // check taht the file is a .py file
+      // check that the file is a .py file
       if (this.$refs.fileInput.files.length > 0 && this.$refs.fileInput.files[0].name.split('.').pop() === 'py') {
         this.uploadedFile = this.$refs.fileInput.files[0];
       } else {
