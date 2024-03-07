@@ -5,6 +5,7 @@ import uuid
 import os 
 
 app = Flask(__name__)
+
 CORS(app, resources={r"/*": {"origins": "https://exp-data-collection-frontend.vercel.app"}})
 
 @app.route('/exercises', methods=['GET'])
