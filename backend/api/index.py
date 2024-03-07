@@ -134,3 +134,6 @@ def submit_feedback(request):
     except Exception as e:
         print(e)
         return jsonify({"error": "Internal Server Error"})
+    
+if __name__ == '__main__':
+    app.run(debug=True)
