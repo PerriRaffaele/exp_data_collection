@@ -7,7 +7,6 @@ import os
 app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "https://exp-data-collection-frontend.vercel.app"}})
-CORS(app)
 
 @app.route('/exercises', methods=['GET'])
 # HERE CODE CALLED FROM THE FRONTEND FILE ExperimentViewUno.vue
