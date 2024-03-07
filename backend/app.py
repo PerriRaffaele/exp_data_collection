@@ -5,7 +5,7 @@ import uuid
 import os 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://exp-data-collection-frontend.vercel.app"}})
 
 @app.route('/exercises', methods=['GET'])
 # HERE CODE CALLED FROM THE FRONTEND FILE ExperimentViewUno.vue
@@ -24,7 +24,7 @@ def get_exercises():
     print("response_data: ", response_data)
     return jsonify(response_data)
     
-    
+
 @app.route('/upload-file', methods=['POST'])
 def upload_file():
     try:
