@@ -8,6 +8,6 @@
         ] }
     ],
     "trailingSlash": true,
-    "cleanUrls": true,
-    
+    "cleanUrls": true
+
   }
