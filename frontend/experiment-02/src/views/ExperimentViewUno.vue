@@ -75,7 +75,7 @@ export default {
         formData.append('file', this.uploadedFile);
         formData.append('userId', this.exercises.user_id);
 
-        const uploadResponse = await axios.post('https://exp-data-collection.vercel.app/upload-file', formData);
+        const uploadResponse = await axios.post('https://flask-backend-self.vercel.app/', formData);
         console.log('File uploaded:', uploadResponse.data);
 
         const timeTaken = performance.now() - this.startTime;
@@ -91,7 +91,7 @@ export default {
           pytamaro: this.participantData.Pytamaro,
           timeTaken
         };
-        const response = await axios.post('https://exp-data-collection.vercel.app/submit-and-export', answerData);
+        const response = await axios.post('https://flask-backend-self.vercel.app/', answerData);
         console.log('Submitted answer data:', response.data);
 
         this.uploadedFile = this.$refs.fileInput.value = null; // Reset the uploaded file
@@ -99,7 +99,7 @@ export default {
         this.currentExercise++; // Move to the next exercise
         if (this.currentExercise > this.totalExercises) {
           // Make a GET request to trigger CSV export
-          const exportResponse = await axios.get('https://exp-data-collection.vercel.app/submit-and-export');
+          const exportResponse = await axios.get('https://flask-backend-self.vercel.app/');
           console.log('Exported answer data to CSV:', exportResponse.data);
 
           // Optionally, you can redirect to a new page after exporting to CSV
