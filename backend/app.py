@@ -24,7 +24,11 @@ def get_exercises():
         'user_id': user_id,
         'exercises': exercise_links_list
     }
-    return jsonify(response_data)
+    response =  jsonify(response_data)
+    response.headers.add('Access-Control-Allow-Origin', 'https://exp-data-collection-frontend.vercel.app')
+    return response
+
+
 
 @app.route('/upload-file', methods=['POST'])
 def upload_file():
