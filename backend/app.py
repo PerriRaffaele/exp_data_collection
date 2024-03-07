@@ -1,12 +1,12 @@
 from flask import Flask, jsonify, request
-# from flask_cors import CORS
+from flask_cors import CORS
 import csv
 import uuid
 import os 
 
 
 app = Flask(__name__)
-# CORS(app, origins='https://exp-data-collection-frontend.vercel.app')
+CORS(app, origins='https://exp-data-collection-frontend.vercel.app')
 
 used_words = set()  # Keep track of used words
 
