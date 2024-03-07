@@ -6,7 +6,7 @@ import os
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins='https://exp-data-collection-frontend.vercel.app')
 
 used_words = set()  # Keep track of used words
 
