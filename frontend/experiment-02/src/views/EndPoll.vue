@@ -14,6 +14,7 @@
 
 <script>
 import axios from 'axios';
+import config from './config';
 export default {
   data() {
     return {
@@ -28,7 +29,7 @@ export default {
           feedback: this.feedback,
         };
         console.log('Submitting feedback:', feedbackData);
-        const response = await axios.post('https://exp-data-backend.vercel.app/submit-feedback', feedbackData);
+        const response = await axios.post(`${config.production_backend}/submit-feedback`, feedbackData);
         console.log('Feedback submitted:', response.data);
 
         this.$router.push('/end-view')

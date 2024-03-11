@@ -23,6 +23,7 @@
 <script>
 import axios from 'axios';
 import EndPoll from "./EndPoll.vue";
+import config from './config';
 
 export default {
   data() {
@@ -40,7 +41,7 @@ export default {
     async fetchBoxWords() {
       try {
         this.startTime = performance.now();
-        const response = await axios.get('https://exp-data-backend.vercel.app/exercises');
+        const response = await axios.get(`${config.production_backend}/exercises`);
         this.exercises = response.data;
         console.log('Fetched exercises:', this.exercises);
 
@@ -71,11 +72,13 @@ export default {
           return;
         }
 
+        const fileContent = await this.readFileContent(this.uploadedFile);
+
         const formData = new FormData();
-        formData.append('file', this.uploadedFile);
+        formData.append('fileContent', fileContent);
         formData.append('userId', this.exercises.user_id);
 
-        const uploadResponse = await axios.post('https://exp-data-backend.vercel.app/upload-file', formData);
+        const uploadResponse = await axios.post(`${config.production_backend}/upload-file`, formData);
         console.log('File uploaded:', uploadResponse.data);
 
         const timeTaken = performance.now() - this.startTime;
@@ -91,7 +94,7 @@ export default {
           pytamaro: this.participantData.Pytamaro,
           timeTaken
         };
-        const response = await axios.post('https://exp-data-backend.vercel.app/submit-and-export', answerData);
+        const response = await axios.post(`${config.production_backend}/submit-and-export`, answerData);
         console.log('Submitted answer data:', response.data);
 
         this.uploadedFile = this.$refs.fileInput.value = null; // Reset the uploaded file
@@ -99,7 +102,7 @@ export default {
         this.currentExercise++; // Move to the next exercise
         if (this.currentExercise > this.totalExercises) {
           // Make a GET request to trigger CSV export
-          const exportResponse = await axios.get('https://exp-data-backend.vercel.app/submit-and-export');
+          const exportResponse = await axios.get(`${config.production_backend}/submit-and-export`);
           console.log('Exported answer data to CSV:', exportResponse.data);
 
           // Optionally, you can redirect to a new page after exporting to CSV
@@ -113,6 +116,18 @@ export default {
       } catch (error) {
         console.error('Error submitting answer data:', error);
       }
+    },
+    async readFileContent(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          resolve(event.target.result);
+        };
+        reader.onerror = (error) => {
+          reject(error);
+        };
+        reader.readAsText(file);
+      });
     },
   },
   computed: {
