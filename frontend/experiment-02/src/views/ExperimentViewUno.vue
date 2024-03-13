@@ -72,14 +72,14 @@ export default {
           return;
         }
 
-        const fileContent = await this.readFileContent(this.uploadedFile);
+        // const fileContent = await this.readFileContent(this.uploadedFile);
 
-        const formData = new FormData();
-        formData.append('fileContent', fileContent);
-        formData.append('userId', this.exercises.user_id);
+        // const formData = new FormData();
+        // formData.append('fileContent', fileContent);
+        // formData.append('userId', this.exercises.user_id);
 
-        const uploadResponse = await axios.post(`${config.production_backend}/upload-file`, formData);
-        console.log('File uploaded:', uploadResponse.data);
+        // const uploadResponse = await axios.post(`${config.production_backend}/upload-file`, formData);
+        // console.log('File uploaded:', uploadResponse.data);
 
         const timeTaken = performance.now() - this.startTime;
         // Make a POST request to the combined endpoint
