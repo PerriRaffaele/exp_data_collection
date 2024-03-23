@@ -102,8 +102,8 @@ export default {
         this.currentExercise++; // Move to the next exercise
         if (this.currentExercise > this.totalExercises) {
           // Make a GET request to trigger CSV export
-          const exportResponse = await axios.get(`${config.production_backend}/submit-and-export`);
-          console.log('Exported answer data to CSV:', exportResponse.data);
+          // const exportResponse = await axios.get(`${config.local_backend}/submit-and-export`);
+          // console.log('Exported answer data to CSV:', exportResponse.data);
 
           // Optionally, you can redirect to a new page after exporting to CSV
           this.$router.push({
