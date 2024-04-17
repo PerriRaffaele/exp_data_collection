@@ -3,7 +3,7 @@
     <h1>Experiment {{ this.currentExercise }}</h1>
     <div v-if="currentExercise <= totalExercises" class="exercise-page">
       <h2>FOLLOW THE LINK, SOLVE THE EXERCISE AND UPLOAD THE PYTHON FILE</h2>
-      <a v-if="exercises.exercises.length > 0" :href="exercises.exercises[this.currentExercise - 1]" target="_blank">Exercise Link</a>
+      <a :href="exercises.exercises[this.currentExercise -1]" target="_blank">Exercise Link</a>
 
       <!-- File upload input -->
       <div>
@@ -11,13 +11,7 @@
       </div>
 
       <!-- Button to trigger file upload and submission -->
-      <button @click="submitAnswerData" :disabled="uploading">Upload & Submit</button>
-
-      <!-- Loading indicator -->
-      <div v-if="uploading">
-        <!-- You can replace this with any loading animation or text -->
-        <p>Loading...</p>
-      </div>
+      <button @click="submitAnswerData">Upload & Submit</button>
     </div>
     <div v-else>
       <p>Experiments completed. Redirecting...</p>
@@ -38,10 +32,9 @@ export default {
       currentExercise: 1,
       counter: 0,
       startTime: null,
-      attempt: 0,
-      exercises: { exercises: [] },
+      attempt:0,
+      exercises: {  exercises:[] },
       uploadedFile: null,
-      uploading: false, // Add a boolean variable to track upload status
     };
   },
   methods: {
@@ -54,7 +47,7 @@ export default {
 
         if (this.counter === this.totalExercises) {
           // Redirect to a new page after 10 experiments
-          this.$router.push({ name: 'EndPoll' });
+          this.$router.push({name: 'EndPoll'});
         }
       } catch (error) {
         console.error('Error fetching exercises:', error);
@@ -69,6 +62,8 @@ export default {
         this.uploadedFile = this.$refs.fileInput.value = null;
         alert('Please upload a .py file');
       }
+
+
     },
     async submitAnswerData() {
       try {
@@ -76,8 +71,6 @@ export default {
           console.error('No file uploaded');
           return;
         }
-
-        this.uploading = true; // Set uploading status to true
 
         const fileContent = await this.readFileContent(this.uploadedFile);
 
@@ -99,7 +92,7 @@ export default {
           programming_language_familiarity: this.participantData.familiarityProgrammingLanguage,
           lines_of_code: this.participantData.linesOfCode,
           pytamaro: this.participantData.Pytamaro,
-          timeTaken 
+          timeTaken
         };
         const response = await axios.post(`${config.production_backend}/submit-and-export`, answerData);
         console.log('Submitted answer data:', response.data);
@@ -109,6 +102,8 @@ export default {
         this.currentExercise++; // Move to the next exercise
         if (this.currentExercise > this.totalExercises) {
           // Make a GET request to trigger CSV export
+          // const exportResponse = await axios.get(`${config.local_backend}/submit-and-export`);
+          // console.log('Exported answer data to CSV:', exportResponse.data);
 
           // Optionally, you can redirect to a new page after exporting to CSV
           this.$router.push({
@@ -120,8 +115,6 @@ export default {
         }
       } catch (error) {
         console.error('Error submitting answer data:', error);
-      } finally {
-        this.uploading = false; // Set uploading status to false after upload completes
       }
     },
     async readFileContent(file) {
@@ -137,11 +130,12 @@ export default {
       });
     },
   },
-  computed: {},
+  computed: {
+  },
   mounted() {
     axios.defaults.withCredentials = true;
     this.fetchBoxWords();
-    //   clean the input for the file
+  //   clean the input for the file
     this.$refs.fileInput.value = null;
   },
   created() {
@@ -152,7 +146,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 /* Add component styles here */
