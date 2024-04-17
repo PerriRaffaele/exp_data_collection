@@ -11,7 +11,11 @@
       </div>
 
       <!-- Button to trigger file upload and submission -->
-      <button @click="submitAnswerData">Upload & Submit</button>
+      <button @click="submitAnswerData" :disabled="uploading">Upload & Submit</button>
+      <div v-if="uploading">
+        <!-- You can replace this with any loading animation or text -->
+        <p>Loading...</p>
+      </div>
     </div>
     <div v-else>
       <p>Experiments completed. Redirecting...</p>
@@ -35,6 +39,7 @@ export default {
       attempt:0,
       exercises: {  exercises:[] },
       uploadedFile: null,
+      uploading: false,
     };
   },
   methods: {
@@ -71,6 +76,8 @@ export default {
           console.error('No file uploaded');
           return;
         }
+        
+        this.uploading = true;
 
         const fileContent = await this.readFileContent(this.uploadedFile);
 
@@ -115,6 +122,8 @@ export default {
         }
       } catch (error) {
         console.error('Error submitting answer data:', error);
+      } finally {
+        this.uploading = false;
       }
     },
     async readFileContent(file) {
