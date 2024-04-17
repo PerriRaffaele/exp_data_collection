@@ -3,7 +3,7 @@
     <h1>Experiment {{ this.currentExercise }}</h1>
     <div v-if="currentExercise <= totalExercises" class="exercise-page">
       <h2>FOLLOW THE LINK, SOLVE THE EXERCISE AND UPLOAD THE PYTHON FILE</h2>
-      <a :href="exercises.exercises[this.currentExercise -1]" target="_blank">Exercise Link</a>
+      <a v-if="exercises.exercises.length > 0" :href="exercises.exercises[this.currentExercise -1]" target="_blank">Exercise Link</a>
 
       <!-- File upload input -->
       <div>
