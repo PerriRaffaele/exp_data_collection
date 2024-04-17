@@ -14,7 +14,7 @@
       <button @click="submitAnswerData" :disabled="uploading">Upload & Submit</button>
       <div v-if="uploading">
         <!-- You can replace this with any loading animation or text -->
-        <p>Loading...</p>
+        <p>Uploading...</p>
       </div>
     </div>
     <div v-else>
