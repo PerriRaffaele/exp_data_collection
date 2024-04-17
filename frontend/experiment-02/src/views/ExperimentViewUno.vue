@@ -99,7 +99,7 @@ export default {
           programming_language_familiarity: this.participantData.familiarityProgrammingLanguage,
           lines_of_code: this.participantData.linesOfCode,
           pytamaro: this.participantData.Pytamaro,
-          timeTaken
+          timeTaken 
         };
         const response = await axios.post(`${config.production_backend}/submit-and-export`, answerData);
         console.log('Submitted answer data:', response.data);
@@ -109,8 +109,6 @@ export default {
         this.currentExercise++; // Move to the next exercise
         if (this.currentExercise > this.totalExercises) {
           // Make a GET request to trigger CSV export
-          // const exportResponse = await axios.get(`${config.local_backend}/submit-and-export`);
-          // console.log('Exported answer data to CSV:', exportResponse.data);
 
           // Optionally, you can redirect to a new page after exporting to CSV
           this.$router.push({
