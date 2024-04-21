@@ -208,7 +208,7 @@ export default {
   async submitEmptyFeedback() {
     try {
       const feedbackData = {
-        user_id: this.participantData.user_id,
+        user_id: this.exercises.user_id,
         feedback: "not finished because the user quit the experiment",
       };
       console.log('Submitting feedback:', feedbackData);
