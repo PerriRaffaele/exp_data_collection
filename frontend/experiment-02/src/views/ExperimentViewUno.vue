@@ -200,7 +200,7 @@ export default {
         };
         const response = await axios.post(`${config.production_backend}/submit-and-export`, answerData);
 
-        submitEmptyFeedback();
+        this.submitEmptyFeedback();
     } catch (error) {
       console.error('Error submitting answer data:', error);
     }
