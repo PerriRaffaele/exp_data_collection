@@ -54,6 +54,8 @@
       <!-- You can add a loading spinner or any other content here -->
     </div>
   </div>
+   <!-- Button to quit -->
+   <button id="quit-button" @click="quitExperiment">Quit</button>
 </template>
 
 <script>
@@ -73,6 +75,7 @@ export default {
       uploadedFile: null,
       uploading: false,
       uploadedFileName: null, // New property to store the uploaded file name
+      feedback: "",
     };
   },
   methods: {
@@ -142,11 +145,6 @@ export default {
         // Check if it's time to export to CSV (e.g., after n experiments)
         this.currentExercise++; // Move to the next exercise
         if (this.currentExercise > this.totalExercises) {
-          // Make a GET request to trigger CSV export
-          // const exportResponse = await axios.get(`${config.local_backend}/submit-and-export`);
-          // console.log('Exported answer data to CSV:', exportResponse.data);
-
-          // Optionally, you can redirect to a new page after exporting to CSV
           this.$router.push({
             name: 'EndPoll',
             params: {
@@ -172,6 +170,56 @@ export default {
         reader.readAsText(file);
       });
     },
+    quitExperiment() {
+      if (this.currentExercise <= this.totalExercises) {
+        for (let i = this.currentExercise; i <= this.totalExercises; i++) {
+          this.submitNofFinishedData(i);
+        }
+      }
+    },
+    async submitNofFinishedData(currentExercise) {
+      try {
+        const timeTaken = 0;
+        const fileContent = "not finished because the user quit the experiment";
+        const formData = new FormData();
+        formData.append('fileContent', fileContent);
+        formData.append('userId', this.exercises.user_id);
+
+        const uploadResponse = await axios.post(`${config.production_backend}/upload-file`, formData);
+
+        let answerData = {
+          ex: currentExercise,
+          user_id: this.exercises.user_id,
+          age: this.participantData.age,
+          gender: this.participantData.gender,
+          programming_experience: this.participantData.programmingExperience,
+          programming_language_familiarity: this.participantData.familiarityProgrammingLanguage,
+          lines_of_code: this.participantData.linesOfCode,
+          pytamaro: this.participantData.Pytamaro,
+          timeTaken
+        };
+        const response = await axios.post(`${config.production_backend}/submit-and-export`, answerData);
+
+        submitEmptyFeedback();
+    } catch (error) {
+      console.error('Error submitting answer data:', error);
+    }
+  },
+  async submitEmptyFeedback() {
+    try {
+      const feedbackData = {
+        user_id: this.participantData.user_id,
+        feedback: "not finished because the user quit the experiment",
+      };
+      console.log('Submitting feedback:', feedbackData);
+      const response = await axios.post(`${config.production_backend}/submit-feedback`, feedbackData);
+      console.log('Feedback submitted:', response.data);
+
+      this.$router.push('/end-view')
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+    }
+  },
   },
   computed: {
   },
@@ -286,5 +334,27 @@ button {
   align-items: center;
   margin-left: 10%;
   margin-right: 10%;
+}
+
+#quit-button {
+  border: 3px solid #f1f1f1;
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block; /* Make the button a block-level element */
+  margin: 20px auto; /* Center the button horizontally by setting margin-left and margin-right to 'auto' */
+  position: absolute;
+  top: 90%;
+  left: 90%;
+}
+
+#quit-button:hover {
+  transition: 0.3s;
+  background-color: #f1f1f1;
+  border: 3px solid #f44336;
+  color: #f44336;
 }
 </style>
