@@ -175,7 +175,11 @@ export default {
         for (let i = this.currentExercise; i <= this.totalExercises; i++) {
           this.submitNofFinishedData(i);
         }
+        for (let i = 0; i <= this.totalExercises; i++) {
+          this.submitEmptyFeedback();
+        }
       }
+      this.$router.push('/end-view');
     },
     async submitNofFinishedData(currentExercise) {
       try {
@@ -199,8 +203,6 @@ export default {
           timeTaken
         };
         const response = await axios.post(`${config.production_backend}/submit-and-export`, answerData);
-
-        this.submitEmptyFeedback();
     } catch (error) {
       console.error('Error submitting answer data:', error);
     }
@@ -214,8 +216,6 @@ export default {
       console.log('Submitting feedback:', feedbackData);
       const response = await axios.post(`${config.production_backend}/submit-feedback`, feedbackData);
       console.log('Feedback submitted:', response.data);
-
-      this.$router.push('/end-view')
     } catch (error) {
       console.error('Error submitting feedback:', error);
     }
