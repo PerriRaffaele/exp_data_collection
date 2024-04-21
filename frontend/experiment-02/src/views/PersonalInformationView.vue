@@ -58,24 +58,22 @@
     </form>
   </div>
   <div v-else class="experiment-container">
-    <h1 class="experiment-title">Experiment</h1>
-    <h2>EXAMPLES OF METHOD IN PYTAMARO</h2>
+    <h1 class="experiment-title">Examples of method in PyTamaro</h1>
     <div class="experiment-description">
-      <div>
-      <div class="snippet">
+      <div >
+      <div class="snippet" >
         <pre>
-          <code><span>public static Graphic circle(double radius) { </span>
-            <span>return ellipse(radius, radius, red);</span>
-            <span>&lt;/picture&gt;</span>
+          <code><span>def circle(diameter: float, color: Color) -> Graphic: </span>
+            <span>   return ellipse(diameter, diameter, color);</span>
             <span></span>
-            <span>show_graphic(circle(150))</span>
+            <span>show_graphic(circle(150, red))</span>
             <span></span>
             <span></span>
           </code>
             <img v-if="clickedOne" src="../../public/red_circle.PNG" alt="responsive image" />
         </pre>
       </div>
-      <button @click="clickedOne = !clickedOne">
+      <button class="run_code" @click="clickedOne = !clickedOne">
         <label v-if="!clickedOne">Run code</label>
         <label v-else>Close</label>
       </button>
@@ -83,18 +81,17 @@
       <div>
       <div class="snippet">
         <pre>
-           <code><span>public static Graphic square(double side) { </span>
-            <span>return rectangle(side, side, blue);</span>
-            <span>&lt;/picture&gt;</span>
+           <code><span>def square(side: double, color: Color) -> Graphic: </span>
+            <span>   return rectangle(side, side, color);</span>
              <span></span>
-            <span>show_graphic(square(150))</span>
+            <span>show_graphic(square(150, blue))</span>
             <span></span>
             <span></span>
           </code>
             <img v-if="clickedTwo" src="../../public/blue_square.PNG" alt="responsive image" />
         </pre>
       </div>
-      <button @click="clickedTwo = !clickedTwo">
+      <button class="run_code" @click="clickedTwo = !clickedTwo">
         <label v-if="!clickedTwo">Run code</label>
         <label v-else>Close</label>
       </button>
@@ -172,6 +169,13 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  text-align: center;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
 pre {
   font-family: monospace;
   background-color: #fff;
@@ -206,18 +210,20 @@ pre span:before {
 }
 
 .personal-info-container {
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 5%;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 2%;
+  font-size: 1.2em;
 }
 
 input,
@@ -225,13 +231,24 @@ select {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
+  font-size: large;
 }
 
 button {
   background-color: #4caf50;
   color: white;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1.5em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.run_code {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
   cursor: pointer;
   border: none;
   border-radius: 5px;
@@ -266,8 +283,9 @@ button:hover {
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 15px;
-  margin-top: 20px;
+  padding: 0.2%;
+  margin-top: 2%;
+  margin-bottom: 3%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -305,15 +323,20 @@ button:hover {
 
 .experiment-title {
     color: #ffffff;
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 2em;
+    position: absolute;
+    top: 5%;
+    left: 35%;
 }
 .experiment-description {
     color: #666;
-    font-size: 16px;
+    font-size: 1.5em;
     line-height: 1.6;
   display: inline-flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: -10%;
 }
 .start-button {
     background-color: #4CAF50;
