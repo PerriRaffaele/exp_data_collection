@@ -175,7 +175,7 @@ export default {
         for (let i = this.currentExercise; i <= this.totalExercises; i++) {
           this.submitNofFinishedData(i);
         }
-        for (let i = 0; i <= this.totalExercises; i++) {
+        for (let i = 1; i <= this.totalExercises; i++) {
           this.submitEmptyFeedback();
         }
       }
