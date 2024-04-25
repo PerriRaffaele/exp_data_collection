@@ -3,7 +3,7 @@
     <h1>Experiment {{ this.currentExercise }}</h1>
     <h2>FOLLOW THE LINK, SOLVE THE EXERCISE AND UPLOAD THE PYTHON FILE</h2>
     <div v-if="currentExercise <= totalExercises" class="exercise-page">
-      <a v-if="exercises.exercises.length > 0" :href="exercises.exercises[this.currentExercise -1]" target="_blank">Exercise Link</a>
+      <a v-if="exercises.exercises.length == 0" :href="exercises.exercises[this.currentExercise -1]" target="_blank">Exercise Link</a>
 
       <!-- File upload input -->
       <div id="upload-file">
@@ -43,16 +43,14 @@
       </div>
     </div>
       <!-- Button to trigger file upload and submission -->
-      <button @click="submitAnswerData" :disabled="uploading">Upload & Submit</button>
-      <div v-if="uploading">
-        <!-- You can replace this with any loading animation or text -->
-        <p>Uploading...</p>
+    </div>
+    <div>
+        <button v-if="uploadedFileName" @click="submitAnswerData" :disabled="uploading">Upload & Submit</button>
+        <div v-if="uploading">
+          <!-- You can replace this with any loading animation or text -->
+          <p>Uploading...</p>
+        </div>
       </div>
-    </div>
-    <div v-else>
-      <p>Experiments completed. Redirecting...</p>
-      <!-- You can add a loading spinner or any other content here -->
-    </div>
   </div>
    <!-- Button to quit -->
    <button id="quit-button" @click="quitExperiment">Quit</button>
@@ -274,8 +272,8 @@ input[type="file"] {
 
 .exercise-page {
   display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
 }
 
