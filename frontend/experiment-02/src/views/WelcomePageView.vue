@@ -37,6 +37,8 @@
         Please approach each exercise with focus and dedication.
         <br>
         Remember, your responses are confidential, and your individual progress will contribute to a broader understanding of programming skill development.
+        <br>
+        During the experiment will not be allowed to go back and forth between the exercises.
       </p>
     </div>
     <router-link to="/personal-info">
