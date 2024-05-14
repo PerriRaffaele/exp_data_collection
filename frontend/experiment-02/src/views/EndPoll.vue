@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="container">
     <h1>End of Poll</h1>
     <p>Thank you for participating in the experiments!</p>
 
@@ -48,15 +48,31 @@ export default {
 </script>
 
 <style scoped>
-/* Add component styles here */
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 h1 {
   text-align: center;
-  margin-top: 20%;
+  position: absolute;
+  top: 20%;
+  left: 45%;
+}
+
+p {
+  text-align: center;
+  position: absolute;
+  top: 30%;
 }
 
 form {
   max-width: 600px;
   margin: 20px auto;
+  position: absolute;
+  top: 40%;
 }
 
 label {
@@ -67,7 +83,7 @@ label {
 textarea {
   width: 100%;
   padding: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 15%;
   resize: vertical;
 }
 
